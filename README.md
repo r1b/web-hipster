@@ -36,3 +36,5 @@ sort -u
 The HTTP response code is not perfect information. Github returns a 404 for
 reserved slugs. Reddit returns a 404 for deleted accounts that cannot be
 re-registered.
+
+The characters allowed in usernames differ from site to site.
