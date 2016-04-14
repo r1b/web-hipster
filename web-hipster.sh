@@ -1,5 +1,7 @@
-for hipname in $(shuf < hip-usernames); do
-    code=$(curl -s -w %{http_code} -o /dev/null https://github.com/$hipname)
+fmtstr=$1
+
+while read hipname; do
+    code=$(curl -L -s -w %{http_code} -o /dev/null $(printf $fmtstr $hipname))
     if [ $code = 200 ]; then
         echo "Bummer man, $hipname is already taken :("
     elif [ $code = 404 ]; then

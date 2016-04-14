@@ -1,21 +1,38 @@
-# github-hipster
+# web-hipster
 
-## Ugh
+## Usage
 
-I know
+`./web-hipster fmtstr < wordlist`
 
-## So like
+## Examples
 
-`./github-hipster`
+`./web-hipster "https://github.com/%s" < wordlists/dict3`
 
-## Wow
+`./web-hipster "https://%s.tumblr.com/" < wordlists/dict4`
 
-I know
+`./web-hipster "https://reddit.com/user/%s" < wordlists/short`
 
-hip-usernames was generated with [crunch](https://sourceforge.net/projects/crunch-wordlist/):
+## Wordlists
+
+**short** Is a list of all words with 1-3 characters
+
+It was generated with [crunch](https://sourceforge.net/projects/crunch-wordlist/)
 
 `crunch 1 3 abcdefghijklmnopqrstuvwxyz0123456789-`
 
-## TODO
-+ Custom wordlist
-+ Custom sites
+**dict${n}** Is a list of words with length n
+
+It was generated with this pipeline:
+
+`
+cat /usr/share/dict/words |
+egrep '^.{$n}$' |
+grep -v \' |
+awk '{print tolower($0)}' |
+sort -u
+`
+
+# TODO
+The HTTP response code is not perfect information. Github returns a 404 for
+reserved slugs. Reddit returns a 404 for deleted accounts that cannot be
+re-registered.
